@@ -6,6 +6,12 @@
   "type": "module",
   "main": "./dist/vue-mrequest.js",
   "types": "./dist/index.d.ts",
+  "homepage": "https://github.com/tachibana-shin/vue-mrequest",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tachibana-shin/vue-mrequest.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
