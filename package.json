@@ -15,7 +15,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
     "test": "vitest",
-    "prepublish": "run-p test \"run\" build && bumpp"
+    "test:ci": "vitest run",
+    "prepublish": "run-p test:ci build && bumpp"
   },
   "peerDependencies": {
     "@vueuse/core": "^11.0.3",
