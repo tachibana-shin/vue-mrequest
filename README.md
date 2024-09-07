@@ -1,39 +1,27 @@
-# vue-request
+## @tachibana-shin/vue-request
 
-This template should help get you started developing with Vue 3 in Vite.
+A Vue.js package based on the idea of [vue-request](https://github.com/attojs/vue-request).
 
-## Recommended IDE Setup
+This package separates the functions into composibles so that the tree can be treeshake
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Example
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-bun install
+```typescript
+const { data, loading, error } = useRequest(
+  useCache(useFetch("/api/users"), {
+    cacheKey: "users"
+  })
+)
 ```
 
-### Compile and Hot-Reload for Development
+### Features
 
-```sh
-bun dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-bun build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-bun lint
-```
+- [`useCache`](./docs/cache.md) - Caching mechanism
+- [`useDebounce`](./docs/debounce.md) - Debouncing mechanism
+- [`useFetch`](./docs/fetch.md) - Fetching mechanism
+- [`useLoadMore`](./docs/load-more.md) - Load more mechanism
+- [`usePagination`](./docs/pagination.md) - Pagination mechanism
+- [`usePolling`](./docs/polling.md) - Polling mechanism
+- [`useRefreshFocus`](./docs/refresh-focus.md) - Refresh focus mechanism
+- [`useRequest`](./docs/request.md) - Asynchronous request handler
+- [`useThrottle`](./docs/throttle.md) - Throttling mechanism

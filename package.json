@@ -12,7 +12,8 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build -d",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "test": "vitest"
   },
   "peerDependencies": {
     "@vueuse/core": "^11.0.3",
@@ -25,6 +26,7 @@
     "@tachibana-shin/eslint-config": "^1.1.1",
     "@tachibana-shin/eslint-config-vue": "^1.1.1",
     "@tsconfig/node20": "^20.1.4",
+    "@types/lodash.delay": "^4.1.9",
     "@types/lodash.get": "^4.4.9",
     "@types/node": "^20.14.5",
     "@vitejs/plugin-vue": "^5.0.5",
@@ -35,11 +37,13 @@
     "ajv": "^8.17.1",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
+    "lodash.delay": "^4.1.1",
     "npm-run-all2": "^6.2.0",
     "prettier": "^3.2.5",
     "typescript": "~5.4.0",
     "vite": "^5.3.1",
     "vite-plugin-dts": "^4.1.1",
+    "vitest": "^2.0.5",
     "vue-tsc": "^2.0.21"
   }
 }

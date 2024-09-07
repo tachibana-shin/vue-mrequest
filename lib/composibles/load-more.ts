@@ -2,7 +2,7 @@ import { ref, shallowReactive, shallowRef, watch } from "vue"
 import { useRequest, type OptionsRequest } from "./request"
 
 export function useLoadMore<
-  R extends { list: any[]; page: number; total: number },
+  R extends { list: unknown[]; page?: number; total?: number },
   A extends any[]
 >(
   fn: (d: R | undefined, ...args: A) => R | Promise<R>,

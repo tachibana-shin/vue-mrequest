@@ -9,11 +9,18 @@ export interface OptionsCache {
   staleTime?: MaybeRefOrGetter<number>
 }
 
-const cacheStore = new Map<
+export const cacheStore = new Map<
   string,
   [result: unknown, created: number, cacheTime: number, staleTime: number]
 >()
-const weakRequestStore = new WeakMap<Function, Promise<unknown>>()
+export const weakRequestStore = new WeakMap<Function, Promise<unknown>>()
+/**
+ * Creates a cached version of the provided function.
+ *
+ * @param {function} fn - The function to be cached.
+ * @param {OptionsCache} options - Options for the cache, including cache key, cache time, and stale time.
+ * @return {function} A function that returns the cached result if available, or calls the original function and caches the result.
+ */
 export function useCache<R, A extends any[]>(
   fn: (...args: A) => R | Promise<R>,
   options: OptionsCache
@@ -25,14 +32,18 @@ export function useCache<R, A extends any[]>(
     const now = Date.now()
     const result = await fn(...args)
 
-    cacheStore.set(cacheKey, [result, now, cacheTime, staleTime])
+    if (cacheTime > 0)
+      cacheStore.set(cacheKey, [result, now, cacheTime, staleTime])
 
     return result
   }
   const refreshCache = (args: A) => {
     const cache = weakRequestStore.get(fn)
     if (cache) return cache as Promise<R>
-    const response = refreshCache$(args)
+    const response = refreshCache$(args).then((response) => {
+      weakRequestStore.delete(fn)
+      return response
+    })
     weakRequestStore.set(fn, response)
 
     return response
@@ -47,6 +58,8 @@ export function useCache<R, A extends any[]>(
         void refreshCache(args)
       }
       return cache[0] as R
+    } else {
+      cacheStore.delete(cacheKey)
     }
 
     return refreshCache(args)

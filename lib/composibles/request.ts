@@ -56,8 +56,8 @@ export function useRequest<R, A extends any[]>(
   const ready = typeof ready$ === "function" ? computed(ready$) : ready$
 
   const data = shallowRef<R | undefined>(initialData)
-  const loading = ref(false)
-  const error = ref<unknown>()
+  const loading = shallowRef(false)
+  const error = shallowRef<unknown>()
 
   async function runAsync$(...args: A): Promise<R> {
     if (manual && ready && !ready.value)
@@ -74,7 +74,7 @@ export function useRequest<R, A extends any[]>(
       onError?.(err)
       throw err
     } finally {
-      loading.value = false
+      if (!loadingKeep) loading.value = false
     }
   }
   const runAsync$$ = errorRetryCount
@@ -87,7 +87,7 @@ export function useRequest<R, A extends any[]>(
   const runAsync = loadingKeep
     ? (...args: A) => {
         const promise = runAsync$$(...args)
-        Promise.race([
+        Promise.all([
           promise,
           new Promise((resolve) => setTimeout(resolve, toValue(loadingKeep)))
         ]).then(() => (loading.value = false))
@@ -96,20 +96,23 @@ export function useRequest<R, A extends any[]>(
       }
     : runAsync$$
 
-  const run = (...args: A) => void runAsync(...args)
+  const run = (...args: A) => void runAsync(...args).catch(() => undefined)
 
   if (!lazy) {
     if (!manual) {
-      if (enabledWatch) watchEffect(() => run(...defaultParams))
-      else run(...defaultParams)
+      if (!ready) {
+        if (enabledWatch) watchEffect(() => run(...defaultParams))
+        else run(...defaultParams)
+      } else {
+        watch(ready, (ready, _, onCleanup) => {
+          if (ready) {
+            if (enabledWatch)
+              onCleanup(watchEffect(() => run(...defaultParams)))
+            else run(...defaultParams)
+          }
+        })
+      }
     }
-    if (ready && !manual)
-      watch(ready, (ready, _, onCleanup) => {
-        if (ready) {
-          if (enabledWatch) onCleanup(watchEffect(() => run(...defaultParams)))
-          else run(...defaultParams)
-        }
-      })
   }
 
   const mutate = (value: R) => (data.value = value)
