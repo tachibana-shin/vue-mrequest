@@ -1,8 +1,10 @@
 {
-  "name": "vue-request",
+  "name": "@tachibana-shin/vue-request",
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "main": "./dist/vue-request.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
