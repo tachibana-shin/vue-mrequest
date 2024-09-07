@@ -29,7 +29,7 @@ The `useDebounce` function returns a debounced version of the provided function 
 ### Example
 
 ```typescript
-import { useDebounce } from "@tachibana-shin/vue-request"
+import { useDebounce } from "@vue-mrequest"
 
 const debouncedFunction = useDebounce(
   (value) => {

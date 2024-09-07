@@ -27,7 +27,7 @@ The function returns another function that, when called with arguments of type A
 #### Basic Example
 
 ```typescript
-import { useFetch } from "@tachibana-shin/vue-request"
+import { useFetch } from "@vue-mrequest"
 import { ref } from "vue"
 
 const fetchData = useFetch<Response, [], "json">("https://api.example.com/data")
@@ -40,7 +40,7 @@ fetchData().then((response) => {
 #### Dynamic URL Example
 
 ```typescript
-import { useFetch } from "@tachibana-shin/vue-request"
+import { useFetch } from "@vue-mrequest"
 import { ref } from "vue"
 
 const userId = ref(1)
@@ -56,7 +56,7 @@ fetchUserData(userId.value).then((response) => {
 ### Custom Request Initialization Example
 
 ```typescript
-import { useFetch } from "@tachibana-shin/vue-request"
+import { useFetch } from "@vue-mrequest"
 import { ref } from "vue"
 
 const fetchDataWithInit = useFetch<Response, [], "json">(

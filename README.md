@@ -1,4 +1,4 @@
-## @tachibana-shin/vue-request
+## @vue-mrequest
 
 A Vue.js package based on the idea of [vue-request](https://github.com/attojs/vue-request).
 

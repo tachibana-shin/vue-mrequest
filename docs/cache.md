@@ -18,7 +18,7 @@ The useCache function is a utility designed to cache the results of asynchronous
 ### Example Usage
 
 ```typescript
-import { useCache } from "@tachibana-shin/vue-request"
+import { useCache } from "@vue-mrequest"
 
 const fetchData = async (id: number) => {
   const response = await fetch(`/api/data/${id}`)

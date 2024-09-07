@@ -1,9 +1,10 @@
 {
-  "name": "@tachibana-shin/vue-request",
+  "name": "vue-mrequest",
+  "description": "Modern request library for vue",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
   "type": "module",
-  "main": "./dist/vue-request.js",
+  "main": "./dist/vue-mrequest.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
@@ -13,7 +14,8 @@
     "type-check": "vue-tsc --build -d",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "test": "vitest"
+    "test": "vitest",
+    "prepublish": "run-p test \"run\" build && bumpp"
   },
   "peerDependencies": {
     "@vueuse/core": "^11.0.3",
@@ -35,6 +37,7 @@
     "@vue/eslint-config-typescript": "^13.0.0",
     "@vue/tsconfig": "^0.5.1",
     "ajv": "^8.17.1",
+    "bumpp": "^9.5.2",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
     "lodash.delay": "^4.1.1",
