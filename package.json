@@ -1,7 +1,7 @@
 {
   "name": "vue-mrequest",
   "description": "Modern request library for vue",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": false,
   "type": "module",
   "main": "./dist/vue-mrequest.js",
