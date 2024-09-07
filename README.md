@@ -1,10 +1,12 @@
-## @vue-mrequest
+## vue-mrequest
+
+Modern request library for `vue`
 
 A Vue.js package based on the idea of [vue-request](https://github.com/attojs/vue-request).
 
 This package separates the functions into composibles so that the tree can be treeshake
 
-Example
+### Example
 
 ```typescript
 const { data, loading, error } = useRequest(
