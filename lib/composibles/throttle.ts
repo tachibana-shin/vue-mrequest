@@ -9,7 +9,7 @@ export interface OptionsThrottle {
   throttleInterval: MaybeRefOrGetter<number>
   throttleOptions?: ThrottleFilterOptions
 }
-export function useThrottle(fn: () => unknown, options: OptionsThrottle) {
+export function useThrottle<Fn extends (...args: any[]) => any>(fn: Fn, options: OptionsThrottle) {
   return useThrottleFn(
     fn,
     options.throttleInterval,

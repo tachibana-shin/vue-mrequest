@@ -8,6 +8,9 @@ export interface OptionsDebounce {
   debounceInterval: MaybeRefOrGetter<number>
   debounceOptions?: DebounceFilterOptions
 }
-export function useDebounce(fn: () => unknown, options: OptionsDebounce) {
+export function useDebounce<Fn extends (...args: any[]) => any>(
+  fn: Fn,
+  options: OptionsDebounce
+) {
   return useDebounceFn(fn, options.debounceInterval, options.debounceOptions)
 }
